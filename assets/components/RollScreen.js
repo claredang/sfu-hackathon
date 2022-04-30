@@ -198,14 +198,16 @@ function RollScreen(props) {
 
         <View style={styles.container}>
             <Dialog.Container visible={visible}>
-              <Dialog.Title>You roll dice 1!</Dialog.Title>
+              <Dialog.Title>Rolled dice 1!</Dialog.Title>
               <Dialog.Description>
-                You lose half points. Your score now is {score}
+                Lose half points. It's now {player}'s turn
               </Dialog.Description>
               <Dialog.Button label="Gotcha" onPress={handleDelete} />
             </Dialog.Container>
           </View>
         </ScrollView>
+
+        
   )
 }
 

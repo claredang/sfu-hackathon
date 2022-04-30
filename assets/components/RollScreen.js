@@ -3,30 +3,25 @@ import React, {useState} from 'react';
 import { IconButton, Colors } from 'react-native-paper';
 import { AnimatedEmoji } from 'react-native-animated-emoji';
 import Dialog from "react-native-dialog";
-import VictoryScreen from './VictoryScreen';
 import Dice1 from '../../assets/images/dice1.png'
 import Dice2 from '../../assets/images/dice2.png'
 import Dice3 from '../../assets/images/dice3.png'
 import Dice4 from '../../assets/images/dice4.png'
 import Dice5 from '../../assets/images/dice5.png'
 import Dice6 from '../../assets/images/dice6.png'
-// import Player1 from '../../assets/images/player1.png'
+import Player1 from '../../assets/images/player1.png'
+import Player2 from '../../assets/images/player2.png'
+import TableImage from '../../assets/images/table.png'
 
 function RollScreen(props) {
-  const [uri,setUri] = useState(Dice1);
+  const [uri, setUri] = useState(Dice1);
   const [score, setScore] = useState(0);
   const [AIscore, setAIScore] = useState(0);
   const [player, setPlayer] = useState('player');
   const [visible, setVisible] = useState(false);
 
-  var playerType = player == 'player' ? 'AI' : 'player';
-
   const showDialog = () => {
     setVisible(true);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
   };
 
   const handleDelete = () => {
@@ -37,11 +32,10 @@ function RollScreen(props) {
     if (number == 1 && player == 'player') {
       setScore(Math.round(score/2));
     }
-    if (number == 1 && player == 'AI') {
-      setScore(Math.round(AIscore/2));
+    else if (number == 1 && player == 'AI') {
+      setAIScore(Math.round(AIscore/2));
     }
-
-    if (player == 'player') {
+    else if (player == 'player') {
       setScore(score + number);
     } else if (player == 'AI') {
       setAIScore(AIscore + number);
@@ -49,19 +43,22 @@ function RollScreen(props) {
   }
 
   const handleReset = () => {
+    setUri(Dice1);
     setScore(0);
     setAIScore(0);
+    setPlayer('player');
   }
 
   const handleSkip = () => {
-    console.log("=== Before", player)
-    if (player == 'player') {
-        setPlayer('AI');
-    } else if (player == 'AI') {
-        setPlayer('player');
+    setPlayer('AI');
+    console.log("player check", player);
+    var AI_continueOrNot = Math.floor(Math.random() * 2) + 1
+    if (AI_continueOrNot == 1) {
+      buttonTapped()
+      // console.log("value", AIscore);
+    } else {
+      handleSkip()
     }
-    console.log("After", player)
-    handleEmoji()
   }
 
   const navigateToScreen = () => {
@@ -76,27 +73,21 @@ function RollScreen(props) {
   }
 
   const handleRoll1 = () => {
-    setUri(Dice1);
-    setPlayer(playerType);
+    setScore(0);
+    console.log("score", score);
     showDialog();
+    handleSkip();
   }
 
   const handleEmoji = () => {
     <AnimatedEmoji
-    index={'emoji.key'} // index to identity emoji component
-    style={{ bottom: 200 }} // start bottom position
-    name={'beer'} // emoji name
-    size={30} // font size
-    duration={10000} // ms
-// onAnimationCompleted={this.onAnimationCompleted} // completion handler
+      index={'emoji.key'} // index to identity emoji component
+      style={{ bottom: 200 }} // start bottom position
+      name={'beer'} // emoji name
+      size={30} // font size
+      duration={10000} // ms
     />
   }
-
-//   const AITurn = () => {
-//       for (randomNumber !== 1 ) {
-//           buttonTapped();
-//       }
-//   }
 
   const buttonTapped = () => {
     let randomNumber = Math.floor(Math.random() * 6) + 1
@@ -104,11 +95,11 @@ function RollScreen(props) {
     switch(randomNumber){
       case 1: 
         setUri(Dice1);
-        // setPlayer(playerType);
         handleRoll1()
-        handleEmoji()
-        calculateScore(1)
-        navigateToScreen()
+        // handleRoll1()
+        // handleEmoji()
+        // calculateScore(1)
+        // navigateToScreen()
         break;
       case 2: 
         setUri(Dice2);
@@ -142,6 +133,7 @@ function RollScreen(props) {
         break;
       default: 
         setUri(Dice6); 
+        setPlayer()
     }
   }
 
@@ -155,25 +147,26 @@ function RollScreen(props) {
         />
         </View>
         <TouchableOpacity onPress={buttonTapped}>
-        {/* <TouchableOpacity onPress={() => props.navigation.navigate('Opening Screen')}> */}
             <Text style={styles.texts}>Roll</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSkip}>
+        <TouchableOpacity onPress={handleSkip} style={{paddingBottom: 16 }}>
             <Text style={styles.texts}>Stop, other turns</Text>
         </TouchableOpacity>
-        <Button
-                onPress={() => 
-                {setScore(0); setAIScore(0)}} title="Reset"
-            />
-            {/* <Image style={styles.pe}
-            source={Player1}
-        />
-        <Image 
-            source={Player2}
-        /> */}
+        <Button onPress={handleReset} title="Reset"></Button>
+        
         <Text>My score: {score}</Text>
         <Text>AI score: {AIscore}</Text>
-        <Text>Current player: {playerType}</Text>
+        <Text>Current player: {player}</Text>
+        <View style={{alignSelf: 'flex-start'}}>
+          <Image source={Player1}></Image>
+        </View>
+        <View style={{alignSelf: 'center', height: 100}}>
+          <Image source={TableImage}></Image>
+        </View>
+        <View style={{alignSelf: 'flex-end'}}>
+        <Text>AI score: {AIscore}</Text>
+          <Image source={Player2}></Image>
+        </View>
 
         <AnimatedEmoji
             index={'emoji.key'} // index to identity emoji component
@@ -181,39 +174,28 @@ function RollScreen(props) {
             name={'beer'} // emoji name
             size={30} // font size
             duration={10000} // ms
-        // onAnimationCompleted={this.onAnimationCompleted} // completion handler
-            />
+        />
 
-        {/* <AnimatedEmoji
-            index={'emoji.key'} // index to identity emoji component
-            style={{ bottom: 200 }} // start bottom position
-            name={'virus'} // emoji name
-            size={30} // font size
-            duration={10000} // ms
-        // onAnimationCompleted={this.onAnimationCompleted} // completion handler
-            /> */}
-        
         <TouchableOpacity>
-        <IconButton
-    icon="help-circle-outline"
-    // color={Colors.red500}
-    size={30}
-    onPress={() => console.log('Pressed')}/>
-    <Text>Game Rule</Text>
-  </TouchableOpacity>
+          <View style={{flexDirection: 'column', backgroundColor: 'grey'}}>
+            <IconButton
+              icon="help-circle-outline"
+              size={30}
+              onPress={() => console.log('Pressed')}/>
+            <Text>Game Rule</Text>
+          </View>
+        </TouchableOpacity>
 
-  <View style={styles.container}>
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>You roll dice 1!</Dialog.Title>
-        <Dialog.Description>
-          You lose half points. Your score now is {score}
-        </Dialog.Description>
-        {/* <Dialog.Button label="No" onPress={handleCancel} /> */}
-        <Dialog.Button label="Gotcha" onPress={handleDelete} />
-      </Dialog.Container>
-    </View>
+        <View style={styles.container}>
+            <Dialog.Container visible={visible}>
+              <Dialog.Title>You roll dice 1!</Dialog.Title>
+              <Dialog.Description>
+                You lose half points. Your score now is {score}
+              </Dialog.Description>
+              <Dialog.Button label="Gotcha" onPress={handleDelete} />
+            </Dialog.Container>
+          </View>
         </ScrollView>
-    // </SafeAreaView>
   )
 }
 
@@ -227,8 +209,8 @@ const styles = StyleSheet.create({
     height:200
   },
   texts:{
-    fontSize:20,
-    color:'black',
+    fontSize: 14,
+    color: 'black',
     marginTop: 30,
     paddingHorizontal: 10,
     borderColor: '#30475E',
@@ -244,7 +226,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   peopleImage: {
-    // height: 10,
     flex: 1,
     justifyContent: 'flex-end',
   },

@@ -29,13 +29,13 @@ function RollScreen(props) {
   };
 
   const calculateScore = (number) => {
-    if (number == 1 && player == 'player') {
-      setScore(Math.round(score/2));
-    }
-    else if (number == 1 && player == 'AI') {
-      setAIScore(Math.round(AIscore/2));
-    }
-    else if (player == 'player') {
+    // if (number == 1 && player == 'player') {
+    //   setScore(Math.round(0));
+    // }
+    // else if (number == 1 && player == 'AI') {
+    //   setAIScore(Math.round(0));
+    // }
+    if (player == 'player') {
       setScore(score + number);
     } else if (player == 'AI') {
       setAIScore(AIscore + number);
@@ -50,16 +50,21 @@ function RollScreen(props) {
   }
 
   const handleSkip = () => {
-    setPlayer('AI');
-    console.log("player check", player);
-    var AI_continueOrNot = Math.floor(Math.random() * 2) + 1
-    if (AI_continueOrNot == 1) {
-      buttonTapped()
-      // console.log("value", AIscore);
-    } else {
-      handleSkip()
+    if (player == 'player') {
+      setPlayer('AI')
+    }
+    else {
+      console.log("player check", player);
+      var AI_continueOrNot = Math.floor(Math.random() * 2) + 1
+      if (AI_continueOrNot == 1) {
+        buttonTapped()
+        // console.log("value", AIscore);
+      } else {
+        setPlayer('player')
+      }
     }
   }
+
 
   const navigateToScreen = () => {
     if (score > 50 || AIscore > 50) {
@@ -73,7 +78,12 @@ function RollScreen(props) {
   }
 
   const handleRoll1 = () => {
-    setScore(0);
+    switch(player){
+      case 'player':
+        setScore(Math.round(score/2))
+      case 'AI':
+        setAIScore(Math.round(AIscore/2));
+    }
     console.log("score", score);
     showDialog();
     handleSkip();

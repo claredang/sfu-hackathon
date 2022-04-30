@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { Title } from 'react-native-paper';
-import BeerImage from '/Users/claredang/Documents/sfu-hackathon/assets/images/beer.png'
+import BeerImage from '../../assets/images/beer.png'
 
 function VictoryScreen(props) {
     return (

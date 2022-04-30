@@ -4,13 +4,14 @@ import { IconButton, Colors } from 'react-native-paper';
 import { AnimatedEmoji } from 'react-native-animated-emoji';
 import Dialog from "react-native-dialog";
 import VictoryScreen from './VictoryScreen';
-// import Dice1 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice1.png'
-import Dice1 from 'images/dice1.png'
-import Dice2 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice2.png'
-import Dice3 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice3.png'
-import Dice4 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice4.png'
-import Dice5 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice5.png'
-import Dice6 from '/Users/claredang/Documents/sfu-hackathon/assets/images/dice6.png'
+// import Dice1 from '/Users/claredang/Documents/sfu-hackathon/assets/images/beer.png'
+// import BeerImage from './DefeatScreen'
+import Dice1 from '../../assets/images/dice1.png'
+import Dice2 from '../../assets/images/dice2.png'
+import Dice3 from '../../assets/images/dice3.png'
+import Dice4 from '../../assets/images/dice4.png'
+import Dice5 from '../../assets/images/dice5.png'
+import Dice6 from '../../assets/images/dice6.png'
 import Player1 from '/Users/claredang/Documents/sfu-hackathon/assets/images/player1.png'
 import Player2 from '/Users/claredang/Documents/sfu-hackathon/assets/images/player2.png'
 

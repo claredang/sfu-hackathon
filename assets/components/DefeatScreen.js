@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { Title } from 'react-native-paper';
-import DefeatedImage from '/Users/claredang/Documents/sfu-hackathon/assets/images/defeated.png'
+import DefeatedImage from '../../assets/images/defeated.png'
 
 function DefeatedScreen(props) {
     return (

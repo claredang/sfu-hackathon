@@ -8,7 +8,7 @@ function DefeatedScreen(props) {
       <View style={styles.container}>
         <Title style={{fontSize: 30, fontWeight: '500', padding: 36}}>Defeated</Title>
         <Image source={DefeatedImage}></Image>
-        <Title style={{padding: 10}}>Fear the human!!!</Title>
+        <Title style={{padding: 10}}>Feel the fear, Human!!!</Title>
         <Button onPress={() => props.navigation.navigate('Opening Screen')}
         title="Play again"></Button>
       </View>

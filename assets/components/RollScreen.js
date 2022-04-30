@@ -54,14 +54,14 @@ function RollScreen(props) {
       setPlayer('AI')
     }
     else {
-      console.log("player check", player);
-      var AI_continueOrNot = Math.floor(Math.random() * 2) + 1
-      if (AI_continueOrNot == 1) {
-        buttonTapped()
-        // console.log("value", AIscore);
-      } else {
+      // console.log("player check", player);
+      // var AI_continueOrNot = Math.floor(Math.random() * 2) + 1
+      // if (AI_continueOrNot == 1) {
+      //   buttonTapped()
+      //   // console.log("value", AIscore);
+      // } else {
         setPlayer('player')
-      }
+      //}
     }
   }
 

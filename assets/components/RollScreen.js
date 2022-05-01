@@ -157,9 +157,9 @@ function RollScreen(props) {
         />
         </View>
         <TouchableOpacity onPress={buttonTapped}>
-            <Text style={styles.texts}>Roll</Text>
+            <Text style={[styles.texts, {backgroundColor: 'rgb(94,136,153)', color: 'white'}]}>Roll</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSkip} style={{paddingBottom: 16 }}>
+        <TouchableOpacity onPress={handleSkip} style={{paddingBottom: 16, backgroundColor: 'rgb(253,246,240)' }}>
             <Text style={styles.texts}>Stop, other turns</Text>
         </TouchableOpacity>
         <Button onPress={handleReset} title="Reset"></Button>

@@ -165,8 +165,8 @@ function RollScreen(props) {
         <Button onPress={handleReset} title="Reset"></Button>
         
         <Text>My score: {score}</Text>
-        <Text>AI score: {AIscore}</Text>
-        <Text>Current player: {player}</Text>
+         {/* <Text>AI score: {AIscore}</Text> */}
+        <Text>Current player: {player}</Text> 
         <View style={{alignSelf: 'flex-start'}}>
           <Image source={Player1}></Image>
         </View>
